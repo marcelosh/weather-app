@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WebJooj</title>
+    <link rel="icon" href="/img/castform-icon.png">
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body>
+    <div class="main-content">
+      {{>header}}
+      <p>Consulte o clima da sua região:</p>
+      <form>
+        <input placeholder="Endereço, cidade...">
+        <button>Procurar</button>
+      </form>
+      <p id="output-text"></p>
+    </div>
+    {{>footer}}
+    <script src="/js/app.js"></script>
+  </body>
+</html>
