@@ -5,6 +5,14 @@ const hbs = require('hbs');
 const geocode = require('../utils/geocode');
 const forecast = require('../utils/forecast');
 
+let debug;
+try {
+    const conf = require('../conf.js');
+    debug = conf.DEBUG;
+} catch(e) {
+    debug = false;
+}
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -74,14 +82,14 @@ app.get('/weather', (req, res) => {
         });
     }
 
-    geocode(address, undefined, (error, { latitude, longitude, location } = {}) => {
+    geocode(address, debug, (error, { latitude, longitude, location } = {}) => {
         if(error) {
             return res.send({
                 error
             });
         }
 
-        forecast(latitude, longitude, undefined, (error, { temperature, weather, daytime } = {}) => {
+        forecast(latitude, longitude, debug, (error, { temperature, weather, daytime } = {}) => {
             if(error) {
                 return res.send({
                     error
