@@ -15,11 +15,12 @@ function fetchData(location) {
                 return;
             }
 
-            const { temperature, weather, daytime, location } = data;
+            const { temperature, apparent_temperature, weather, daytime, location } = data;
 
             const localizedTemperature = temperature.toString().replace('.', ',');
+            const localizedApparentTemperature = apparent_temperature.toString().replace('.', ',');
 
-            paragraph.textContent = 'Agora é ' + daytime + ' em ' + location + '. Faz ' + localizedTemperature + ' ºC, ' + weather + '.';
+            paragraph.textContent = 'Agora é ' + daytime + ' em ' + location + '. Faz ' + localizedTemperature + ' ºC com sensação térmica de ' + localizedApparentTemperature + ' ºC e com previsão de ' + weather + '.';
         });
     });
 }

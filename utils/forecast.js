@@ -2,7 +2,7 @@ const request = require('request');
 const weather = require('./weather.js');
 
 const forecast = (latitude, longitude, debug, callback) => {
-    const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&current_weather=true';
+    const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&current=temperature_2m,apparent_temperature,is_day,weathercode';
 
     request({ url, json: true }, (error, { body } = {}) => {
         if(error) {
@@ -23,7 +23,7 @@ const forecast = (latitude, longitude, debug, callback) => {
             return;
         }
 
-        const { temperature, weathercode, is_day } = body.current_weather;
+        const { temperature_2m: temperature, apparent_temperature, weathercode, is_day } = body.current;
         const daytime = is_day === 1 ? 'dia' : 'noite';
 
         if(debug) {
@@ -32,6 +32,7 @@ const forecast = (latitude, longitude, debug, callback) => {
 
         callback(undefined, {
             temperature,
+            apparent_temperature,
             weather: weather.types[weathercode],
             daytime
         });

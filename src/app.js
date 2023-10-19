@@ -89,7 +89,7 @@ app.get('/weather', (req, res) => {
             });
         }
 
-        forecast(latitude, longitude, debug, (error, { temperature, weather, daytime } = {}) => {
+        forecast(latitude, longitude, debug, (error, { temperature, apparent_temperature, weather, daytime } = {}) => {
             if(error) {
                 return res.send({
                     error
@@ -98,6 +98,7 @@ app.get('/weather', (req, res) => {
 
             res.send({
                 temperature,
+                apparent_temperature,
                 weather,
                 daytime,
                 location,
